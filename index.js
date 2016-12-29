@@ -11,7 +11,7 @@ const speakButton = document.querySelector('#speak');
 const stopButton = document.querySelector('#stop');
 // Grab text to voice
 msg.text = document.querySelector('[name="text"]').value;
-
+// Create voice selection dropdown
 function populateVoices() {
   voices = this.getVoices();
   const voiceOptions = voices
@@ -19,5 +19,11 @@ function populateVoices() {
     .join('');
   voicesDropdown.innerHTML = voiceOptions;
 }
+// Find selected voice and set msg.voice
+function setVoice() {
+  console.log('Changing voice...');
+  msg.voice = voices.find(voice => voice.name === this.value);
+}
 
 speechSynthesis.addEventListener('voiceschanged', populateVoices);
+voicesDropdown.addEventListener('change', setVoice);
